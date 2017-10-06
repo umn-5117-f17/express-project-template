@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
     <section class="section">
@@ -14,5 +15,8 @@
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/javascripts/local.js"></script>
+    {{#each scripts}}
+      <script src="/javascripts/{{this}}"></script>
+    {{/each}}
   </body>
 </html>

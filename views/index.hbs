@@ -1,36 +1,49 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="index-page">
 
-<form class="box" action="/upload-file-form" enctype="multipart/form-data" method="post" id="theform">
+  <h1>{{title}}</h1>
+  <p>starting point and example code</p>
 
-  <div class="file has-name" style="margin-bottom: 10px;">
-    <label class="file-label">
-      <input class="file-input" id="theinputfield" type="file" name="thefile">
-      <span class="file-cta">
-        <span class="file-icon">
-          <i class="fa fa-upload"></i>
+  <h2>file uploads</h2>
+
+  <form class="box" action="/upload/upload-file-form" enctype="multipart/form-data" method="post" id="theform">
+
+    <div class="file has-name" id="file-chooser-widget">
+      <label class="file-label">
+        <input class="file-input" id="theinputfield" type="file" name="thefile">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
         </span>
-        <span class="file-label">
-          Choose a file…
+        <span class="file-name" id="fn">
+          ...
         </span>
-      </span>
-      <span class="file-name" id="fn">
-        ...
-      </span>
-    </label>
-  </div>
+      </label>
+    </div>
 
-  <p>
-    <input class="button" type="submit" value="Send file (submit)" id="theSubmitButton">
-    <input class="button" type="button" value="Send file (ajax)" id="theAjaxButton">
-  </p>
-</form>
+    <p>
+      <input class="button" type="submit" value="Send file (submit)" id="theSubmitButton">
+      <input class="button" type="button" value="Send file (ajax)" id="theAjaxButton">
+    </p>
+  </form>
 
-<article class="message">
-  <div class="message-header">
-    <p>AJAX response</p>
-  </div>
-  <div class="message-body">
-    <div id="ajaxResponse">(...)</div>
-  </div>
-</article>
+  <article class="message">
+    <div class="message-header">
+      <p>AJAX response</p>
+    </div>
+    <div class="message-body">
+      <div id="ajaxResponse">(...)</div>
+    </div>
+  </article>
+
+  <h2>todos from a db call</h2>
+  <ul>
+    {{#each todos}}
+      <li>{{ this.task }}</li>
+    {{/each}}
+  </ul>
+
+</div>
