@@ -1,22 +1,15 @@
-# Notes on integrating bulma
+# Express Project Template
 
-add from CDN:
+Features:
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+* based on output of express generator v4.15.0 + handlebars
+* add nodemon and `npm run dev`
+* add error logging to console
+* include bulma, jquery client-side libraries
+* include multer for file upload
+* include express-mongo-db for db connection management
 
-include base style:
+Example code:
 
-    <section class="section">
-      <div class="content">
-        {{{body}}}
-      </div>
-    </section>
-
-Changes:
-
-* http://bulma.io/documentation/elements/box/
-* http://bulma.io/documentation/components/message/
-
-* http://bulma.io/documentation/elements/button/
-* http://bulma.io/documentation/form/file/
+* file upload
+* mongodb
