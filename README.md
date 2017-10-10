@@ -48,6 +48,6 @@ Example code:
     heroku config:set AUTH0_DOMAIN=(foo).auth0.com AUTH0_CALLBACK_URL=http://(heroku-dns)/callback
 ```
 
-* add the callback to "allowed callback URLs" list in auth0 client settings: <http://hidden-scrubland-72932.herokuapp.com/callback>
+* add the callback to "allowed callback URLs" list in auth0 client settings: `http://(heroku-dns).herokuapp.com/callback`
 
 * check the code in and `git push heroku master`
