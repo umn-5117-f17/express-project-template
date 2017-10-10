@@ -1,0 +1,39 @@
+<div class="upload-page">
+
+  <h1>file uploads</h1>
+
+  <form class="box" action="/upload/upload-file-form" enctype="multipart/form-data" method="post" id="theform">
+
+    <div class="file has-name" id="file-chooser-widget">
+      <label class="file-label">
+        <input class="file-input" id="theinputfield" type="file" name="thefile">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+        <span class="file-name" id="fn">
+          ...
+        </span>
+      </label>
+    </div>
+
+    <p>
+      <input class="button" type="submit" value="Send file (submit)" id="theSubmitButton">
+      <input class="button" type="button" value="Send file (ajax)" id="theAjaxButton">
+    </p>
+  </form>
+
+  <article class="message">
+    <div class="message-header">
+      <p>AJAX response</p>
+    </div>
+    <div class="message-body">
+      <div id="ajaxResponse">(...)</div>
+    </div>
+  </article>
+
+</div>

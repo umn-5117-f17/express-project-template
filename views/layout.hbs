@@ -8,11 +8,35 @@
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
+
+    <nav class="navbar is-light">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item title" href="/">5117 Express Project Template</a>
+        </div>
+        <div class="navbar-end">
+          {{#if user}}
+            <span class="navbar-item">
+              <figure class="image is-16x16">
+                <img src="{{ user.picture }}" alt="Image">
+              </figure>
+              &nbsp;
+              {{ user.displayName }}
+            </span>
+            <a class="navbar-item" href="/logout">log out</a>
+          {{else}}
+            <a class="navbar-item" href="/login">log in</a>
+          {{/if}}
+        </div>
+      </div>
+    </nav>
+
     <section class="section">
       <div class="content">
         {{{body}}}
       </div>
     </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/javascripts/local.js"></script>
     {{#each scripts}}

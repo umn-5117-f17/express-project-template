@@ -7,6 +7,13 @@ var upload = multer({ storage: multer.memoryStorage() })
 // to store on the filesystem; also add this dir to .gitignore!
 // var upload = multer({ dest: 'uploads/' })
 
+router.get('/', function(req, res, next) {
+  res.render('upload', {
+    scripts: ['file-upload.js'],
+  });
+
+});
+
 router.post('/upload-file-form', upload.single('thefile'), function(req, res) {
   if (!req.file) {
     res.status(500).send('error: no file');
