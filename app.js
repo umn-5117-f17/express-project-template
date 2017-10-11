@@ -1,23 +1,24 @@
-var debug = require('debug')('app:startup');
+const debug = require('debug')('app:startup');
 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var expressMongoDb = require('express-mongo-db');
-var passport = require('passport');
-var session = require('express-session');
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressMongoDb = require('express-mongo-db');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-var auth = require('./auth');
+const auth = require('./auth');
 
-var index = require('./routes/index');
-var db = require('./routes/db');
-var upload = require('./routes/upload');
+const index = require('./routes/index');
+const db = require('./routes/db');
+const upload = require('./routes/upload');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +34,7 @@ app.use(expressMongoDb(process.env.DB_URI));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    store: new MongoStore({ url: process.env.DB_URI }),
     resave: true,
     saveUninitialized: true
   })
@@ -56,7 +58,7 @@ app.get('/protected', ensureLoggedIn('/login'), function(req, res, next) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

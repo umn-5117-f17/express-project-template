@@ -21,12 +21,12 @@ passport.use(new Auth0Strategy(
 
 // This can be used to keep a smaller payload
 passport.serializeUser(function(user, done) {
-  debug("auth0 serialize user: " + JSON.stringify(user, null, 4));
+  // debug("auth0 serialize user: " + JSON.stringify(user, null, 4));
   done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-  debug("auth0 deserialize user: " + JSON.stringify(user, null, 4));
+  // debug("auth0 deserialize user: " + JSON.stringify(user, null, 4));
   done(null, user);
 });
 
