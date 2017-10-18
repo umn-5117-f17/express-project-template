@@ -36,4 +36,17 @@
     </div>
   </article>
 
+  <h1>files</h1>
+
+  <p>total files: {{ numFiles }}</p>
+
+  <ul>
+    {{#each files}}
+      <li>
+        <a href="/upload/view/{{ this._id }}">{{ this.filename }}</a>
+        -- {{ this.contentType }} {{ this.length }}
+      </li>
+    {{/each}}
+  </ul>
+
 </div>

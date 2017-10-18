@@ -1,17 +1,57 @@
 var express = require('express');
 var router = express.Router();
 
+// add co lib to chain promises
+var co = require('co');
+
+var mongodb = require('mongodb');
+
 // add multer lib to support file uploads
 var multer  = require('multer')
-var upload = multer({ storage: multer.memoryStorage() })
+var multerGridFs = require('multer-gridfs-storage');
+
+// use this for sending files to browser from gridfs
+var Gridfs = require('gridfs-stream');
+
+// to store in memory:
+// var upload = multer({ storage: multer.memoryStorage() })
+
+// to store in mongodb (GridFS):
+const multerGridFsStorage = multerGridFs({
+   url: process.env.DB_URI
+});
+var upload = multer({ storage: multerGridFsStorage });
+
 // to store on the filesystem; also add this dir to .gitignore!
 // var upload = multer({ dest: 'uploads/' })
 
 router.get('/', function(req, res, next) {
-  res.render('upload', {
-    scripts: ['file-upload.js'],
+
+  // example of using co + promises to simplify sequential mongo queries
+  co(function*() {
+    var col = req.db.collection('fs.files');
+
+    var count = yield col.find().count();
+    var files = yield col.find().toArray();
+
+    res.render('upload', {
+      scripts: ['file-upload.js'],
+      numFiles: count,
+      files: files,
+    });
+
+  }).catch(function(err) {
+    next(err);
   });
 
+});
+
+router.get('/view/:fileId', function(req, res, next) {
+  var gfs = Gridfs(req.db, mongodb);
+  var readstream = gfs.createReadStream({
+    _id: req.params.fileId
+  });
+  return readstream.pipe(res);
 });
 
 router.post('/upload-file-form', upload.single('thefile'), function(req, res) {
